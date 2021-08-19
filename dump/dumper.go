@@ -188,7 +188,7 @@ func (d *Dumper) Dump(w io.Writer) error {
 	args = append(args, "--quick")
 
 	// We only care about data
-	args = append(args, "--no-create-info")
+	//args = append(args, "--no-create-info")
 
 	// Multi row is easy for us to parse the data
 	args = append(args, "--skip-extended-insert")
@@ -226,16 +226,20 @@ func (d *Dumper) Dump(w io.Writer) error {
 		args = append(args, "--databases")
 		args = append(args, d.Databases...)
 	} else {
-		args = append(args, d.TableDB)
+		//args = append(args, d.TableDB)
+		//args = append(args, d.Tables...)
+		args = append(args, "--databases")
+		args = append(args, d.Databases...)
+		args = append(args, "--tables")
 		args = append(args, d.Tables...)
 
 		// If we only dump some tables, the dump data will not have database name
 		// which makes us hard to parse, so here we add it manually.
 
-		_, err := w.Write([]byte(fmt.Sprintf("USE `%s`;\n", d.TableDB)))
-		if err != nil {
-			return fmt.Errorf(`could not write USE command: %w`, err)
-		}
+		//_, err := w.Write([]byte(fmt.Sprintf("USE `%s`;\n", d.TableDB)))
+		//if err != nil {
+		//	return fmt.Errorf(`could not write USE command: %w`, err)
+		//}
 	}
 
 	log.Infof("exec mysqldump with %v", args)
