@@ -40,7 +40,9 @@ func (h *dumpParseHandler) Data(db string, table string, values []string) error 
 	if err := h.c.ctx.Err(); err != nil {
 		return err
 	}
-
+	if db == "" && h.c.dumper.TableDB != ""{
+		db = h.c.dumper.TableDB
+	}
 	tableInfo, err := h.c.GetTable(db, table)
 	if err != nil {
 		e := errors.Cause(err)
