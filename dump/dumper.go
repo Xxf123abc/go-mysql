@@ -131,6 +131,7 @@ func (d *Dumper) AddTables(db string, tables ...string) {
 	//	d.TableDB = db
 	//	d.Tables = d.Tables[0:0]
 	//}
+	d.TableDB = db
 	d.Databases = append(d.Databases,db)
 	d.Tables = append(d.Tables, tables...)
 }
