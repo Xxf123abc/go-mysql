@@ -127,11 +127,11 @@ func (d *Dumper) AddDatabases(dbs ...string) {
 }
 
 func (d *Dumper) AddTables(db string, tables ...string) {
-	if d.TableDB != db {
-		d.TableDB = db
-		d.Tables = d.Tables[0:0]
-	}
-
+	//if d.TableDB != db {
+	//	d.TableDB = db
+	//	d.Tables = d.Tables[0:0]
+	//}
+	d.Databases = append(d.Databases,db)
 	d.Tables = append(d.Tables, tables...)
 }
 
